@@ -1,40 +1,24 @@
 function init(elements) {
-
+const render = data => 
+{svg.selectAll('rect').data(data)
+   .enter().apend ('rect')
+     .attr('width',300)
+     .attr('height',300)
+}; 
 
   let svg = d3.select("body").append("svg")
     .attr("width", 600)
     .attr("height", 600)
-    .style("background-color", d3.color("rgba(400, 3000, 60, 0.5)") )
+    .style("background-color", d3.color("rgba(40, 35025, 60, 0.5)") )
     ;
-
-
-  let jsonCircles = elements.filter( e => {  return e.Type == "cat" && e.Day == "Sunday";  } );
-
-  let jsonRects = elements.filter( e => {  return e.Type == "dog" && e.Day == "Sunday";  } );
-
-  let jsonTexts = elements.filter( e => {  return e.Day == "Sunday";  } );
-
-
-  let circles = svg.selectAll()
-    .data(jsonCircles)
-    .enter() //when we are seeing new CAT data for the first time
-      .append("circle") //append a circle shape for each data point, and set various attributes based on the data
-        .attr("fill", d3.color("rgba(0,255,0,0.5)")  )
-        .attr("cx", d => { return d.Cuteness * 60; })
-        .attr("cy", d => { return 600 - d.Size * 60; })
-        .attr("r", 30) 
-        .attr("stroke", d3.color("rgba(0,0,0,0.5)") )
-        .attr("stroke-width", 3)
-    ;   
     
+   let rects = svg.selectAll()
     
-  let rects = svg.selectAll()
-    .data(jsonRects)
-    .enter() //when we are seeing new DOG data for the first time
-      .append("rect") //append a rect shape for each data point, and set various attributes based on the data
+    .enter() 
+      .append("rect") 
         .attr("fill", d3.color("rgba(0,0,255,0.5)")  )
-        .attr("x", d => { return -30 + d.Cuteness * 60; })
-        .attr("y", d => { return -30 + 600 - d.Size * 60; })
+        .attr("x", d => { return -30 + d.days * 60; })
+        .attr("y", d => { return -30 + 600 - d.barked * 60; })
         .attr("width", d => { return 60; }) 
         .attr("height", d => { return 60; }) 
         .attr("stroke", d3.color("rgba(0,0,0,0.5)") )
@@ -43,16 +27,16 @@ function init(elements) {
 
 
 let text = svg.selectAll()
-  .data(jsonTexts)
+  
   .enter()
   .append("text")
   .attr("text-anchor","middle")
   .attr("font-family", "sans-serif")
   .attr("font-size", "16px")
   .attr("fill", "black")
-  .attr("x", d => { return -30 + (d.Cuteness * 60) + 30; })
-  .attr("y", d => { return -30 + 600 - (d.Size * 60) + 80; })
-  .text(d => {return d.Name})
+  .attr("x", d => { return -30 + (d.monday* 60) + 30; })
+  .attr("y", d => { return -30 + 600 - (d.barked * 60) + 80; })
+  .text(d => {return d.barked})
 
 
 const xText = svg.append("text")
@@ -62,9 +46,13 @@ const xText = svg.append("text")
   .attr("font-family", "sans-serif")
   .attr("font-size", "24px")
   .attr("fill", "black")
-  .text("Cuteness of Pet");
+  .text("Days of the Week");
 
- const yText = svg.append("text")
+
+
+
+
+const yText = svg.append("text")
   //.attr("x", 300)
   //.attr("y", 300)
   .attr("text-anchor","middle")
@@ -73,8 +61,7 @@ const xText = svg.append("text")
   .attr("fill", "black")
   //.attr("transform", "translate(0,0) rotate()")
   .attr("transform", "translate(10,300) rotate(90)")
-  .text("Size of Pet");
-
+  .text("Amount of times barked");
 
 
 
