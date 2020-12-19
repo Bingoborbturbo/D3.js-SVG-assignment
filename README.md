@@ -1,2 +1,2 @@
 # D3.js-SVG-assignment
-![](images/Screenshot (68).png)
+![](images/example1.png)
