@@ -4,7 +4,7 @@ function init(elements) {
   let svg = d3.select("body").append("svg")
     .attr("width", 600)
     .attr("height", 600)
-    .style("background-color", d3.color("rgba(255, 0, 0, 0.5)") )
+    .style("background-color", d3.color("rgba(400, 3000, 60, 0.5)") )
     ;
 
 
