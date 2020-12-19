@@ -1,2 +1,2 @@
 # D3.js-SVG-assignment
-![](images/example1.png)
+![alt text](example1.png)
